@@ -1,0 +1,36 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-branzel-block-bootstrap-slide {
+	.toggleHeader {
+		width:100%;
+		line-height:1.5em;
+		padding:0.7em 1em;
+		font-weight:bold;
+		border:1px solid black;
+	}
+	
+	.toggleContent {
+		padding:1em;
+		background-position:center;
+		background-size:cover;
+		
+		.button.button-large {
+			display:block;
+			margin:0.5em auto 1em;
+		}
+		
+		.toggleContent:hover {
+			
+		}
+		
+		
+		h1, p, a.btn {
+			margin-left: 51;
+		}
+	}
+}
