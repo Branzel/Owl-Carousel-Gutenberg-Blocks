@@ -46,7 +46,7 @@ const ALLOWED_BLOCKS = [ 'branzel/block-owlcarousel-slide' ];
  */
 const getSlidesTemplate = ( numSlides ) => {
 	var col = [];
-	
+
 	for ( var i = 0; i < numSlides; i++ ) {
 		col.push([ 'branzel/block-owlcarousel-slide' ]);
 	}
@@ -69,7 +69,7 @@ registerBlockType( 'branzel/block-owlcarousel-slider', {
 		numSlides: {
 			type: 'number',
 			default: 1
-		},	
+		},
 		slideTime: {
 			type: 'string',
 			default: 1500
@@ -106,26 +106,26 @@ registerBlockType( 'branzel/block-owlcarousel-slider', {
 		onSlideTimeChange(slideTime) {
 			this.props.setAttributes({slideTime});
 		}
-		
+
 		onEnableNavigationChange(enableNavigation) {
 			this.props.setAttributes({ enableNavigation });
 		}
-		
+
 		onEnableIndicatorsChange(enableIndicators) {
 			this.props.setAttributes({ enableIndicators });
 		}
-		
+
 		onToolbarAction(action) {
 			console.log (action);
 		}
 
 		render() {
-			const { 
-				className, 
-				attributes: { 
-					slideTime, 
-					enableNavigation, 
-					enableIndicators, 
+			const {
+				className,
+				attributes: {
+					slideTime,
+					enableNavigation,
+					enableIndicators,
 					numSlides
 				},
 			} = this.props;
@@ -133,8 +133,8 @@ registerBlockType( 'branzel/block-owlcarousel-slider', {
 			return (
 				<Fragment>
 					<BlockControls>
-						<Toolbar 
-							controls={ [ 
+						<Toolbar
+							controls={ [
 								{
 									icon: 'plus',
 									title: __( 'Add Slide' ),
@@ -199,24 +199,11 @@ registerBlockType( 'branzel/block-owlcarousel-slider', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	save: withInstanceId( function renderBlock( { attributes, className, instanceId } ) {
-		const { 
-			slideTime, 
-			enableNavigation, 
-			enableIndicators, 
-			numSlides,
-			anchor
-		} = attributes;
-		
-		return (
-			<Fragment>
-				<div id={ `branzel-carousel-${ instanceId }` } className={ classnames('owl-carousel', 'owl-theme') }>
-					<InnerBlocks.Content />
-				</div>
-				<script>
-					{ "jQuery( document ).ready(function() { jQuery('#" + `branzel-carousel-${ instanceId }` + "').owlCarousel({ loop:true,margin:10,nav:true }) });" }
-				</script>
-			</Fragment>
-		);
-	}),
+   save: function( props ) {
+     return (
+       <Fragment>
+         <InnerBlocks.Content />
+       </Fragment>
+     );
+   },
 } );

@@ -23,10 +23,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 function owl_carousel_cgb_block_assets() {
 	// Styles.
 	wp_enqueue_style(
-		'owl_carousel-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
+		'branzel-blocks-owl-carousel-style-css', // Handle.
+		plugins_url( '/dist/blocks.style.build.css', BRANZEL_OWLCAROUSEL__FILE__ ), // Block style CSS.
+		array( 'wp-blocks' ), // Dependency to include the CSS after it.
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
+	);
+
+	wp_enqueue_script(
+		'owl-carousel-js',
+		plugins_url( '/includes/js/owl.carousel.min.js', BRANZEL_OWLCAROUSEL__FILE__ ),
+		array( 'jquery' ),
+		'2.3.4',
+		true
 	);
 } // End function owl_carousel_cgb_block_assets().
 
@@ -45,24 +53,16 @@ add_action( 'enqueue_block_assets', 'owl_carousel_cgb_block_assets' );
 function owl_carousel_cgb_editor_assets() {
 	// Scripts.
 	wp_enqueue_script(
-		'owl_carousel-cgb-block-js', // Handle.
+		'branzel-blocks-owl-carousel-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Dependencies, defined above.
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
-	);
-	
-	wp_enqueue_script(
-		'owl-carousel-js',
-		plugins_url( '/includes/js/owl.carousel.min.js', BRANZEL_OWLCAROUSEL__FILE__ ),
-		array( 'jquery' ),
-		'2.3.4',
-		true
 	);
 
 	// Styles.
 	wp_enqueue_style(
-		'owl_carousel-cgb-block-editor-css', // Handle.
+		'branzel-blocks-owl-carousel-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ) // Dependency to include the CSS after it.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.

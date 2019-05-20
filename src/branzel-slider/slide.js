@@ -26,7 +26,7 @@ const hexToRgbA = (hex, alpha) => {
         c= '0x'+c.join('');
         return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+","+alpha+')';
     }
-	
+
 	return 'rgba(0,0,0,' + alpha + ')';
 }
 
@@ -140,17 +140,17 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 			this.onSelectImage = this.onSelectImage.bind(this);
 			this.onSlideHeightChange = this.onSlideHeightChange.bind(this);
 		}
-		
+
 		toggleHidden () {
 			this.setState({
 				isHidden: !this.state.isHidden
 			})
 		}
-		
+
 		onSlideHeightChange(slideHeight) {
 			this.props.setAttributes({ slideHeight });
 		}
-		
+
 		onSelectImage ( media ) {
 			return this.props.setAttributes( {
 				mediaURL: media.url,
@@ -160,7 +160,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 
 		render() {
 			const { className, attributes: {
-				mediaID, 
+				mediaID,
 				mediaURL,
 				mediaPosition,
 				slideTitle,
@@ -169,7 +169,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 				linkURL,
 				linkTitle,
 				linkTarget,
-				slideHeight, 
+				slideHeight,
 				captionBackgroundOpacity,
 				captionBackgroundColor,
 				captionTitleColor,
@@ -177,7 +177,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 				enableCaption
 			},
 			} = this.props;
-				
+
 			return (
 				<Fragment>
 					<InspectorControls>
@@ -213,21 +213,21 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 							<BaseControl
 								label={ __( "Caption Title Color" ) }
 								>
-								<ColorPalette 
+								<ColorPalette
 									value={captionTitleColor}
 									onChange={(captionTitleColor) => this.props.setAttributes({ captionTitleColor })} />
 							</BaseControl>
 							<BaseControl
 								label={ __( "Caption Text Color" ) }
 								>
-								<ColorPalette 
+								<ColorPalette
 									value={captionTextColor}
 									onChange={(captionTextColor) => this.props.setAttributes({ captionTextColor })} />
 							</BaseControl>
 							<BaseControl
 								label={ __( "Caption Background Color" ) }
 								>
-								<ColorPalette 
+								<ColorPalette
 									value={captionBackgroundColor}
 									onChange={(captionBackgroundColor) => this.props.setAttributes({ captionBackgroundColor })} />
 							</BaseControl>
@@ -254,7 +254,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 						</PanelBody>
 						}
 					</InspectorControls>
-						<PanelBody 
+						<PanelBody
 							title={ __( 'Slide' ) }
 							initialOpen={ false }
 							icon="format-image"
@@ -277,7 +277,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 											>
 											{ __( 'Upload Image' ) }
 											</Button>
-											
+
 										);
 									} }
 								/>
@@ -321,7 +321,7 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 											color: captionTextColor
 										} }
 									/>
-									<a 
+									<a
 										className="btn btn-primary btn-lg"
 										>
 										<RichText
@@ -350,8 +350,8 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save( { attributes, className } ) {
-		const { 
-			mediaID, 
+		const {
+			mediaID,
 			mediaURL,
 			mediaPosition,
 			slideTitle,
@@ -360,16 +360,16 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 			linkURL,
 			linkTitle,
 			linkTarget,
-			slideHeight, 
+			slideHeight,
 			captionBackgroundOpacity,
 			captionBackgroundColor,
 			captionTitleColor,
 			captionTextColor,
 			enableCaption
 		} = attributes;
-		
+
 		return (
-			<div className={ "carousel-item" + ( className ? " " + className : '' ) }
+			<div className={ "owl-item" + ( className ? " " + className : '' ) }
 				style={ {
 					backgroundImage: ( mediaURL ? "url('" + mediaURL + "')" : "none" ),
 					backgroundPosition: "center " + mediaPosition,
@@ -422,141 +422,5 @@ registerBlockType( 'branzel/block-owlcarousel-slide', {
 				}
 			</div>
 		);
-	},
-	
-	deprecated: [
-        {
-            attributes: {
-				mediaID: {
-					type: 'number',
-				},
-				mediaURL: {
-					type: 'string'
-				},
-				slideTitle: {
-					type: 'string',
-					source: 'children',
-					selector: 'h1'
-				},
-				leadContent: {
-					type: 'string',
-					source: 'children',
-					selector: 'p.lead'
-				},
-				content: {
-					type: 'string',
-					source: 'children',
-					selector: 'p.otherContent'
-				},
-				linkURL: {
-					type: 'url',
-					default:'#',
-					source: 'attribute',
-					selector: 'a.btn',
-					attribute: 'href'
-				},
-				linkTitle: {
-					type: 'string',
-				},
-				linkTarget: {
-					type: 'string',
-					default:'_self',
-					source: 'attribute',
-					selector: 'a.btn',
-					attribute: 'target'
-				},
-				slideHeight: {
-					type: 'number',
-					default: 450
-				},
-				captionBackgroundColor: {
-					type: 'string',
-					default: "#ffffff"
-				},
-				captionBackgroundOpacity: {
-					type: 'number',
-					default: 0.6
-				},
-				captionTitleColor: {
-					type: 'string',
-					default: "#000000"
-				},
-				captionTextColor: {
-					type: 'string',
-					default: "#000000"
-				}
-            },
-
-            save( { attributes, className } ) {
-				const { 
-					mediaID, 
-					mediaURL,
-					slideTitle,
-					leadContent,
-					content,
-					linkURL,
-					linkTitle,
-					linkTarget,
-					slideHeight, 
-					captionBackgroundOpacity,
-					captionBackgroundColor,
-					captionTitleColor,
-					captionTextColor,
-				} = attributes;
-				
-				return (
-					<div className={ "carousel-item" + ( className ? " " + className : '' ) }
-						style={ {
-							backgroundImage: ( mediaURL ? "url('" + mediaURL + "')" : "none" ),
-							minHeight: slideHeight + "px"
-						} }
-					>
-						<div className="carousel-caption d-block d-md-block"
-							style={ {
-								backgroundColor: hexToRgbA ( captionBackgroundColor, captionBackgroundOpacity),
-								display: ( ( slideTitle == '' && leadContent == '' && content == '' && linkTitle == '' ) ? "none" : "block" )
-							} }
-							>
-							<RichText.Content
-								tagName='h1'
-								value={ slideTitle }
-								className="display-4"
-								style={ {
-									color: captionTitleColor
-								} }
-							/>
-							<RichText.Content
-								tagName='p'
-								value={ leadContent }
-								className="lead"
-								style={ {
-									color: captionTextColor
-								} }
-							/>
-							<RichText.Content
-								tagName='p'
-								className="otherContent"
-								value={ content }
-								style={ {
-									color: captionTextColor
-								} }
-							/>
-							{ !linkTitle ? '' :
-								<a
-									className="btn btn-primary btn-lg"
-									target={ linkTarget }
-									href={ linkURL }
-								>
-									<RichText.Content
-										tagName='span'
-										value={ linkTitle }
-									/>
-								</a>
-							}
-						</div>
-					</div>
-				);
-			},
-        }
-    ]
+	}
 } );
