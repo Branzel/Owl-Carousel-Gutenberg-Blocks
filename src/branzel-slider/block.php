@@ -6,9 +6,9 @@ class Branzel_Owl_Block_Slider {
     	self::$branzel_content_slider_num++;
 
       // TOEVOEGEN: SLIDE TIME, NAVIGATION OPTIONS
-    	wp_add_inline_script( 'owl-carousel-js',
+    	wp_add_inline_script( 'owl-carousel',
         sprintf(
-          'jQuery(window).load(function() { jQuery("#branzel-carousel-%d").owlCarousel({ loop:true, margin:10, nav:%d, dots: %d, autoplaySpeed: %d }); });',
+          'jQuery(document).ready(function(){ jQuery("#branzel-carousel-%d").owlCarousel({ itemElement:"owl-item", loop:true, nav:%d, dots:%d, autoplay:1, autoplaySpeed:%d, items:1 }); });',
           self::$branzel_content_slider_num,
           $attributes[ 'enableNavigation'],
           $attributes[ 'enableIndicators'],
@@ -20,7 +20,7 @@ class Branzel_Owl_Block_Slider {
     }
 
     public static function run() {
-      register_block_type( 'branzel/block-owlcarousel-slider', array(
+      register_block_type( 'branzel-content/block-owlcarousel-slider', array(
         'attributes' => array(
         		'numSlides' => array(
         			'type' => 'number',

@@ -22,16 +22,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function owl_carousel_cgb_block_assets() {
 	// Styles.
+
 	wp_enqueue_style(
-		'branzel-blocks-owl-carousel-style-css', // Handle.
+		'branzel-blocks-owl-carousel-style', // Handle.
 		plugins_url( '/dist/blocks.style.build.css', BRANZEL_OWLCAROUSEL__FILE__ ), // Block style CSS.
-		array( 'wp-blocks' ), // Dependency to include the CSS after it.
+		array(  ), // Dependency to include the CSS after it.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
+	// Plugin for the slider
 	wp_enqueue_script(
-		'owl-carousel-js',
-		plugins_url( '/includes/js/owl.carousel.min.js', BRANZEL_OWLCAROUSEL__FILE__ ),
+		'owl-carousel',
+		plugins_url( '/includes/js/owl.carousel.js', BRANZEL_OWLCAROUSEL__FILE__ ),
 		array( 'jquery' ),
 		'2.3.4',
 		true
